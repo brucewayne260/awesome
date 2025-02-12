@@ -1,2 +1,2 @@
-# my-awesomewm-dotfiles.
+# my-old-awesomewm-dotfiles.
 This is my personal awesome config.
