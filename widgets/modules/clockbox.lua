@@ -2,8 +2,9 @@ local _M = {}
 
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local createbox = require("widgets.createbox")
 
-_M.clockbox = wibox.widget {
+local clockbox = wibox.widget {
   widget = wibox.layout.fixed.horizontal,
   {
     {
@@ -34,5 +35,9 @@ _M.clockbox = wibox.widget {
     halign = "center",
   },
 }
+
+function _M.box(col, darkcol, left_margin, right_margin)
+  return createbox.createbox(clockbox, nil, col, darkcol, left_margin, right_margin)
+end
 
 return _M

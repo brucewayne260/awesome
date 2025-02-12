@@ -4,10 +4,11 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
+local createbox = require("widgets.createbox")
 
 local command = "nmcli --fields NAME c show --active | sed '2q;d'"
 
-_M.wifibox = wibox.widget {
+local wifibox = wibox.widget {
   widget = wibox.layout.fixed.horizontal,
   {
     {
@@ -45,8 +46,12 @@ _M.wifibox = wibox.widget {
 
 local update_text = function()
 	awful.spawn.easy_async_with_shell(command, function(stdout)
-    _M.wifibox:get_children_by_id("text")[1].markup = stdout
+    wifibox:get_children_by_id("text")[1].markup = stdout
 	end)
+end
+
+function _M.box(col, darkcol, left_margin, right_margin)
+  return createbox.createbox(wifibox, nil, col, darkcol, left_margin, right_margin)
 end
 
 gears.timer {

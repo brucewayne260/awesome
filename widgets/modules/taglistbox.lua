@@ -3,8 +3,16 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
+local client = client
+local screen = screen
 
 local mod = require'bindings.mod'
+
+beautiful.taglist_bg_empty = beautiful.background
+beautiful.taglist_bg_occupied = beautiful.dblack
+beautiful.taglist_bg_focus = beautiful.black
+beautiful.taglist_shape = gears.shape.rounded_rect
+beautiful.taglist_spacing = 5
 
 local is_empty = function(tag)
   local count = 0
@@ -19,14 +27,14 @@ end
 
 local setcolor = function(self, t)
   if t.selected then
-    self:get_children_by_id("depth")[1].bg = beautiful.bg_focus
-    self:get_children_by_id("background_role")[1].fg = beautiful.bg_normal
+    self:get_children_by_id("depth")[1].bg = beautiful.dblack
+    self:get_children_by_id("background_role")[1].fg = beautiful.background
   elseif not is_empty(t) then
-    self:get_children_by_id("depth")[1].bg = beautiful.bg_normal
-    self:get_children_by_id("background_role")[1].fg = beautiful.bg_normal
+    self:get_children_by_id("depth")[1].bg = beautiful.background
+    self:get_children_by_id("background_role")[1].fg = beautiful.background
   else
-    self:get_children_by_id("depth")[1].bg = beautiful.bg_normal
-    self:get_children_by_id("background_role")[1].fg = beautiful.fg_normal
+    self:get_children_by_id("depth")[1].bg = beautiful.background
+    self:get_children_by_id("background_role")[1].fg = beautiful.black
   end
 end
 
@@ -74,8 +82,9 @@ local function create_taglist(s)
           id = "background_role",
           widget = wibox.container.background,
           {
-            margins = 4,
             widget  = wibox.container.margin,
+            left = 4,
+            right = 4,
             {
               id     = "index_role",
               widget = wibox.widget.textbox,
@@ -83,12 +92,12 @@ local function create_taglist(s)
           },
         },
       },
-      create_callback = function(self, t, index, objects)
+      create_callback = function(self, t)
         self:get_children_by_id("index_role")[1].markup = "<b> "..t.index.." </b>"
         setcolor(self, t)
         pressed(self, t)
       end,
-      update_callback = function(self, t, index, objects)
+      update_callback = function(self, t)
         self:get_children_by_id("index_role")[1].markup = "<b> "..t.index.." </b>"
         setcolor(self, t)
         pressed(self, t)

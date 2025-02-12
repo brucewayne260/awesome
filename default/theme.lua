@@ -2,7 +2,6 @@
 -- Default awesome theme --
 ---------------------------
 
-local gears = require("gears")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
@@ -15,30 +14,37 @@ local theme = {}
 theme.font          = "SauceCodePro Nerd Font 10"
 theme.squeeze       = 8
 
-theme.red     = '#ea6962'
-theme.green   = '#a9b665'
-theme.yellow  = '#e3a84e'
-theme.blue    = '#7daea3'
-theme.magenta = '#d3869b'
-theme.cyan    = '#89b482'
+theme.black     = "#928374"
+theme.red       = '#ea6962'
+theme.green     = '#a9b665'
+theme.yellow    = '#e3a84e'
+theme.blue      = '#7daea3'
+theme.magenta   = '#d3869b'
+theme.cyan      = '#89b482'
+theme.white     = '#ffffff'
 
-theme.dred     = '#8A3E3A'
-theme.dgreen   = '#636B3B'
-theme.dyellow  = '#86632E'
-theme.dblue    = '#4A6660'
-theme.dmagenta = '#7C4F5B'
-theme.dcyan    = '#506A4C'
+theme.dblack    = "#665c54"
+theme.dred      = '#8A3E3A'
+theme.dgreen    = '#636B3B'
+theme.dyellow   = '#86632E'
+theme.dblue     = '#4A6660'
+theme.dmagenta  = '#7C4F5B'
+theme.dcyan     = '#506A4C'
+theme.dwhite    = "#dfbf8e"
 
-theme.bg_normal     = "#282828"
-theme.bg_focus      = "#665c54"
-theme.bg_urgent     = "#ea6962"
-theme.bg_minimize   = "#282828"
+theme.background = "#282828"
+theme.foreground = theme.white
+
+theme.bg_normal     = theme.background
+theme.bg_focus      = theme.dblack
+theme.bg_urgent     = theme.red
+theme.bg_minimize   = theme.background
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#928374"
-theme.fg_focus      = "#dfbf8e"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#928374"
+theme.fg_normal     = theme.black
+theme.fg_focus      = theme.dwhite
+theme.fg_urgent     = theme.white
+theme.fg_minimize   = theme.black
 
 theme.useless_gap         = dpi(3)
 theme.border_width        = dpi(2)
@@ -46,16 +52,10 @@ theme.border_color_normal = theme.fg_normal
 theme.border_color_active = theme.fg_focus
 theme.border_color_marked = "#91231c"
 
-theme.hotkeys_modifiers_fg = "#7daea3"
+theme.hotkeys_modifiers_fg = theme.blue
 theme.hotkeys_fg = theme.fg_focus
 
 theme.tasklist_bg_focus = "#00000000"
-
-theme.taglist_bg_empty = theme.bg_normal
-theme.taglist_bg_occupied = theme.bg_focus
-theme.taglist_bg_focus = theme.fg_normal
-theme.taglist_shape = gears.shape.rounded_rect
-theme.taglist_spacing = 5
 
 theme.menu_border_width = 1
 theme.menu_border_color = theme.border_color_active

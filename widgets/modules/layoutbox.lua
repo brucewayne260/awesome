@@ -1,8 +1,10 @@
 local _M = {}
 local awful = require("awful")
 local wibox = require("wibox")
+local createbox = require("widgets.createbox")
+local screen = screen
 
-_M.buttons = {
+local buttons = {
   awful.button{
     modifiers = {},
     button    = 1,
@@ -25,22 +27,18 @@ _M.buttons = {
   },
 }
 
-local function create_layoutbox(s)
-  return awful.widget.layoutbox{
-    screen = s,
-  }
-end
-
+local layoutbox
 screen.connect_signal('request::desktop_decoration', function(s)
-
-	s.layoutbox = create_layoutbox(s)
-  _M.layoutbox = wibox.widget {
+  layoutbox = wibox.widget {
     widget = wibox.container.margin,
     top = 4,
     bottom = 4,
-    s.layoutbox,
+    awful.widget.layoutbox(s)
   }
-
 end)
+
+function _M.box(col, darkcol, left_margin, right_margin)
+  return createbox.createbox(layoutbox, buttons, col, darkcol, left_margin, right_margin)
+end
 
 return _M

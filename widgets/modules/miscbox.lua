@@ -3,8 +3,9 @@ local _M = {}
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local createbox = require("widgets.createbox")
 
-_M.miscbox = wibox.widget {
+local miscbox = wibox.widget {
   widget = wibox.layout.fixed.horizontal,
   {
     {
@@ -31,5 +32,9 @@ _M.miscbox = wibox.widget {
     halign = "center",
   },
 }
+
+function _M.box(col, darkcol, left_margin, right_margin)
+  return createbox.createbox(miscbox, nil, col, darkcol, left_margin, right_margin)
+end
 
 return _M

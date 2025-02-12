@@ -4,20 +4,21 @@ local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
+local createbox = require("widgets.createbox")
 
 local command = "playerctl metadata -f '{{title}} - {{artist}}'"
 local getplayer = "playerctl -l | head -n1"
-local squeeze
+local statusbox
 
 _M.update_icon = function()
   awful.spawn.easy_async_with_shell(getplayer, function(stdout)
-    _M.statusbox:get_children_by_id("text")[1].markup = "<b>"..stdout.."</b>"
+    statusbox:get_children_by_id("text")[1].markup = "<b>"..stdout.."</b>"
   end)
 	awful.spawn.easy_async("playerctl status", function(stdout)
     if string.match(stdout, "%S+") == "Playing" then
-      _M.statusbox:get_children_by_id("image")[1].image = beautiful.pause_dark
+      statusbox:get_children_by_id("image")[1].image = beautiful.pause_dark
     else
-      _M.statusbox:get_children_by_id("image")[1].image = beautiful.play_dark
+      statusbox:get_children_by_id("image")[1].image = beautiful.play_dark
     end
 	end)
 end
@@ -134,14 +135,14 @@ _M.playerctlbox = wibox.widget {
   },
 }
 
-_M.sbuttons = awful.button {
+local buttons = awful.button {
   modifiers = {},
   button = 1,
   on_press = function()
     _M.action.play_pause()
   end,
 }
-_M.statusbox = wibox.widget {
+statusbox = wibox.widget {
   widget = wibox.layout.fixed.horizontal,
   {
     {
@@ -176,6 +177,10 @@ _M.statusbox = wibox.widget {
     halign = "center",
   },
 }
+
+function _M.box(col, darkcol, left_margin, right_margin)
+  return createbox.createbox(statusbox, buttons, col, darkcol, left_margin, right_margin)
+end
 
 gears.timer {
   timeout   = 5,

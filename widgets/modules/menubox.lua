@@ -1,9 +1,10 @@
 local _M = {}
 
 local awful = require("awful")
-local wibox = require("wibox")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful = require("beautiful")
+local createbox = require("widgets.createbox")
+local awesome = awesome
 
 local apps = require'config.apps'
 
@@ -35,6 +36,8 @@ local launcher = awful.widget.launcher{
   menu = _M.mainmenu,
 }
 
-_M.menubox = launcher
+function _M.box(col, darkcol, left_margin, right_margin)
+  return createbox.createbox(launcher, nil, col, darkcol, left_margin, right_margin)
+end
 
 return _M

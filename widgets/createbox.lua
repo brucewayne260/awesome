@@ -4,16 +4,12 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 
-function _M.createbox(content, col, darkcol, buttons, left_margin, right_margin)
+function _M.createbox(content, buttons, col, darkcol, left_margin, right_margin)
   local darkfg
   local border
-  local border_color
   if col or darkcol then
     darkfg = beautiful.bg_normal
     border = 0
-  end
-  if col == beautiful.fg_normal then
-    border_color = beautiful.bg_focus
   end
   local box = wibox.widget {
     widget = wibox.container.background,
@@ -24,13 +20,13 @@ function _M.createbox(content, col, darkcol, buttons, left_margin, right_margin)
       {
         widget = wibox.container.margin,
         bottom = 0,
-        top = 10,
+        top = 5,
         {
           id = "depth",
           widget = wibox.container.background,
           bg = darkcol or beautiful.bg_normal,
           border_width = border or 1,
-          border_color = border_color or beautiful.fg_normal,
+          border_color = beautiful.fg_normal,
           shape = gears.shape.rounded_rect,
         },
       },

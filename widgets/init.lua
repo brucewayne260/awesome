@@ -3,7 +3,6 @@ local _M = {}
 local awful = require'awful'
 local wibox = require'wibox'
 local be = require'beautiful'
-local createbox = require'widgets.createbox'
 
 local mem       = require'widgets.modules.membox'
 local misc      = require'widgets.modules.miscbox'
@@ -18,16 +17,16 @@ local volume    = require'widgets.modules.volumebox'
 local wifi      = require'widgets.modules.wifibox'
 
 -- Widgets, colors, buttons, margins
-local menubox   = createbox.createbox(menu.menubox, nil, nil, nil)
-local wifibox   = createbox.createbox(wifi.wifibox, nil, nil, nil, be.squeeze)
-local statusbox = createbox.createbox(playerctl.statusbox, be.green, be.dgreen, playerctl.sbuttons, be.squeeze, be.squeeze)
-local middlebox = createbox.createbox(middle.middlebox, nil, nil, middle.buttons, be.squeeze * 5, be.squeeze * 5)
-local volumebox = createbox.createbox(volume.volumebox, be.blue, be.dblue, volume.buttons, be.squeeze, be.squeeze)
-local cpubox    = createbox.createbox(cpu.cpubox, nil, nil, nil, be.squeeze, be.squeeze)
-local membox    = createbox.createbox(mem.membox, be.red, be.dred, nil, be.squeeze, be.squeeze)
-local miscbox   = createbox.createbox(misc.miscbox, nil, nil, nil, be.squeeze)
-local clockbox  = createbox.createbox(clock.clockbox, be.yellow, be.dyellow, nil, be.squeeze, be.squeeze)
-local layoutbox = createbox.createbox(layout.layoutbox, nil, nil, layout.buttons, be.squeeze / 2, be.squeeze / 2)
+local menubox   = menu.box(nil, nil, nil, nil)
+local wifibox   = wifi.box(nil, nil, be.squeeze, nil)
+local statusbox = playerctl.box(be.green, be.dgreen, be.squeeze, be.squeeze)
+local middlebox = middle.box(nil, nil, be.squeeze * 5, be.squeeze * 5)
+local volumebox = volume.box(be.blue, be.dblue, be.squeeze, be.squeeze)
+local cpubox    = cpu.box(nil, nil, be.squeeze, be.squeeze)
+local membox    = mem.box(be.red, be.dred, be.squeeze, be.squeeze)
+local miscbox   = misc.box(nil, nil, be.squeeze, nil)
+local clockbox  = clock.box(be.black, be.dblack, be.squeeze, be.squeeze)
+local layoutbox = layout.box(nil, nil, be.squeeze / 2, be.squeeze / 2)
 
 function _M.create_wibar(s)
   return awful.wibar{
@@ -50,21 +49,27 @@ function _M.create_wibar(s)
           taglist.taglistbox,
           wifibox,
           statusbox,
+          {
+            widget = wibox.widget.separator,
+            forced_width = 1,
+            thickness = 0,
+          },
         },
         -- middle widgets
         {
           widget = wibox.container.place,
           halign = "center",
-          {
-            widget = wibox.container.constraint,
-            width = 600,
-            middlebox,
-          },
+          middlebox,
         },
         -- right widgets
         {
           layout = wibox.layout.fixed.horizontal,
           spacing = 5,
+          {
+            widget = wibox.widget.separator,
+            forced_width = 1,
+            thickness = 0,
+          },
           volumebox,
           cpubox,
           membox,
