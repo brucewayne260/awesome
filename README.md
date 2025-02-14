@@ -3,6 +3,7 @@ My personal awesome configs based on this modularized [structure](https://github
 
 ## Requirments
 * [awesome-git](https://github.com/awesomeWM/awesome)
+* playerctl
 * screenshot: maim
 * terminal: alacritty
 * editor: neovim
