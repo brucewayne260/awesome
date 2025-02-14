@@ -9,6 +9,9 @@ local menubox = require'widgets.modules.menubox'
 local playerctlbox = require'widgets.modules.playerctlbox'
 local volumebox = require'widgets.modules.volumebox'
 local middlebox = require'widgets.modules.middlebox'
+local client = client
+local mouse = mouse
+local awesome = awesome
 
 menubar.utils.terminal = apps.terminal
 

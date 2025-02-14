@@ -17,16 +17,17 @@ local volume    = require'widgets.modules.volumebox'
 local wifi      = require'widgets.modules.wifibox'
 
 -- Widgets, colors, buttons, margins
-local menubox   = menu.box(nil, nil, nil, nil)
-local wifibox   = wifi.box(nil, nil, be.squeeze, nil)
+local menubox   = menu.box(nil, nil)
+local tagbox    = taglist.box(be.blue, be.dblue)
+local wifibox   = wifi.box(be.orange, be.dorange, be.squeeze, 0)
 local statusbox = playerctl.box(be.green, be.dgreen, be.squeeze, be.squeeze)
-local middlebox = middle.box(nil, nil, be.squeeze * 5, be.squeeze * 5)
-local volumebox = volume.box(be.blue, be.dblue, be.squeeze, be.squeeze)
-local cpubox    = cpu.box(nil, nil, be.squeeze, be.squeeze)
-local membox    = mem.box(be.red, be.dred, be.squeeze, be.squeeze)
-local miscbox   = misc.box(nil, nil, be.squeeze, nil)
+local middlebox = middle.box(nil, nil)
+local volumebox = volume.box(be.green, be.dgreen, be.squeeze, be.squeeze)
+local cpubox    = cpu.box(be.red, be.dred, be.squeeze, be.squeeze)
+local membox    = mem.box(be.blue, be.dblue, be.squeeze, be.squeeze)
+local miscbox   = misc.box(be.yellow, be.dyellow, be.squeeze, be.squeeze)
 local clockbox  = clock.box(be.black, be.dblack, be.squeeze, be.squeeze)
-local layoutbox = layout.box(nil, nil, be.squeeze / 2, be.squeeze / 2)
+local layoutbox = layout.box(nil, nil)
 
 function _M.create_wibar(s)
   return awful.wibar{
@@ -46,7 +47,7 @@ function _M.create_wibar(s)
           layout = wibox.layout.fixed.horizontal,
           spacing = 5,
           menubox,
-          taglist.taglistbox,
+          tagbox,
           wifibox,
           statusbox,
           {

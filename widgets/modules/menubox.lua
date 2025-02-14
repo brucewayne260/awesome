@@ -36,8 +36,8 @@ local launcher = awful.widget.launcher{
   menu = _M.mainmenu,
 }
 
-function _M.box(col, darkcol, left_margin, right_margin)
-  return createbox.createbox(launcher, nil, col, darkcol, left_margin, right_margin)
+function _M.box(col, darkcol)
+  return createbox.createbox(launcher, nil, col, darkcol)
 end
 
 return _M

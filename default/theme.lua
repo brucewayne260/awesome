@@ -18,22 +18,24 @@ theme.black     = "#928374"
 theme.red       = '#ea6962'
 theme.green     = '#a9b665'
 theme.yellow    = '#e3a84e'
+theme.orange    = '#e78a4e'
 theme.blue      = '#7daea3'
 theme.magenta   = '#d3869b'
 theme.cyan      = '#89b482'
 theme.white     = '#ffffff'
 
 theme.dblack    = "#665c54"
-theme.dred      = '#8A3E3A'
-theme.dgreen    = '#636B3B'
-theme.dyellow   = '#86632E'
-theme.dblue     = '#4A6660'
-theme.dmagenta  = '#7C4F5B'
-theme.dcyan     = '#506A4C'
+theme.dred      = theme.red..'96'
+theme.dgreen    = theme.green..'96'
+theme.dyellow   = theme.yellow..'96'
+theme.dorange   = theme.orange..'96'
+theme.dblue     = theme.blue..'96'
+theme.dmagenta  = theme.magenta..'96'
+theme.dcyan     = theme.cyan..'96'
 theme.dwhite    = "#dfbf8e"
 
 theme.background = "#282828"
-theme.foreground = theme.white
+theme.foreground = theme.black
 
 theme.bg_normal     = theme.background
 theme.bg_focus      = theme.dblack
@@ -41,10 +43,10 @@ theme.bg_urgent     = theme.red
 theme.bg_minimize   = theme.background
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = theme.black
+theme.fg_normal     = theme.foreground
 theme.fg_focus      = theme.dwhite
 theme.fg_urgent     = theme.white
-theme.fg_minimize   = theme.black
+theme.fg_minimize   = theme.foreground
 
 theme.useless_gap         = dpi(3)
 theme.border_width        = dpi(2)

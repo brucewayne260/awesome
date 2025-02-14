@@ -33,12 +33,14 @@ screen.connect_signal('request::desktop_decoration', function(s)
     widget = wibox.container.margin,
     top = 4,
     bottom = 4,
+    left = 4,
+    right = 4,
     awful.widget.layoutbox(s)
   }
 end)
 
-function _M.box(col, darkcol, left_margin, right_margin)
-  return createbox.createbox(layoutbox, buttons, col, darkcol, left_margin, right_margin)
+function _M.box(col, darkcol)
+  return createbox.createbox(layoutbox, buttons, col, darkcol)
 end
 
 return _M
