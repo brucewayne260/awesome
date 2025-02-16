@@ -150,107 +150,86 @@ awful.keyboard.append_global_keybindings{
     group       = 'launcher',
     on_press    = function() menubar.show() end,
   },
-  -- awful.key{
-  --   modifiers   = {mod.super},
-  --   key         = 'x',
-  --   description = 'lua execute prompt',
-  --   group       = 'awesome',
-  --   on_press    = function()
-  --     awful.prompt.run{
-  --       prompt = 'Run Lua code: ',
-  --       textbox = awful.screen.focused().promptbox.widget,
-  --       exe_callback = awful.util.eval,
-  --       history_path = awful.util.get_cache_dir() .. '/history_eval'
-  --     }
-  --   end,
-  -- },
-  -- awful.key{
-  --   modifiers   = {mod.super},
-  --   key         = 'r',
-  --   description = 'run prompt',
-  --   group       = 'launcher',
-  --   on_press    = function() awful.screen.focused().promptbox:run() end,
-  -- },
 }
 
 -- tags related keybindings
 awful.keyboard.append_global_keybindings{
-   awful.key{
-      modifiers   = {mod.super},
-      key         = 'Left',
-      description = 'view previous',
-      group       = 'tag',
-      on_press    = awful.tag.viewprev,
-   },
-   awful.key{
-      modifiers   = {mod.super},
-      key         = 'Right',
-      description = 'view next',
-      group       = 'tag',
-      on_press    = awful.tag.viewnext,
-   },
-   awful.key{
-      modifiers   = {mod.super},
-      key         = 'Escape',
-      description = 'go back',
-      group       = 'tag',
-      on_press    = awful.tag.history.restore,
-   },
+  awful.key{
+    modifiers   = {mod.super},
+    key         = 'Left',
+    description = 'view previous',
+    group       = 'tag',
+    on_press    = awful.tag.viewprev,
+  },
+  awful.key{
+    modifiers   = {mod.super},
+    key         = 'Right',
+    description = 'view next',
+    group       = 'tag',
+    on_press    = awful.tag.viewnext,
+  },
+  awful.key{
+    modifiers   = {mod.super},
+    key         = 'Escape',
+    description = 'go back',
+    group       = 'tag',
+    on_press    = awful.tag.history.restore,
+  },
 }
 
 -- focus related keybindings
 awful.keyboard.append_global_keybindings{
   awful.key{
-     modifiers   = {mod.super},
-     key         = 'j',
-     description = 'focus next by index',
-     group       = 'client',
-     on_press    = function() awful.client.focus.byidx(1) end,
+    modifiers   = {mod.super},
+    key         = 'j',
+    description = 'focus next by index',
+    group       = 'client',
+    on_press    = function() awful.client.focus.byidx(1) end,
   },
   awful.key{
-     modifiers   = {mod.super},
-     key         = 'k',
-     description = 'focus previous by index',
-     group       = 'client',
-     on_press    = function() awful.client.focus.byidx(-1) end,
+    modifiers   = {mod.super},
+    key         = 'k',
+    description = 'focus previous by index',
+    group       = 'client',
+    on_press    = function() awful.client.focus.byidx(-1) end,
   },
   awful.key{
-     modifiers   = {mod.super},
-     key         = 'Tab',
-     description = 'go back',
-     group       = 'client',
-     on_press    = function()
-        awful.client.focus.history.previous()
-        if client.focus then
-           client.focus:raise()
-        end
-     end,
+    modifiers   = {mod.super},
+    key         = 'Tab',
+    description = 'go back',
+    group       = 'client',
+    on_press    = function()
+      awful.client.focus.history.previous()
+      if client.focus then
+        client.focus:raise()
+      end
+    end,
   },
   awful.key{
-     modifiers   = {mod.super, mod.ctrl},
-     key         = 'j',
-     description = 'focus the next screen',
-     group       = 'screen',
-     on_press    = function() awful.screen.focus_relative(1) end,
+    modifiers   = {mod.super, mod.ctrl},
+    key         = 'j',
+    description = 'focus the next screen',
+    group       = 'screen',
+    on_press    = function() awful.screen.focus_relative(1) end,
   },
   awful.key{
-     modifiers   = {mod.super, mod.ctrl},
-     key         = 'k',
-     description = 'focus the previous screen',
-     group       = 'screen',
-     on_press    = function() awful.screen.focus_relative(-1) end,
+    modifiers   = {mod.super, mod.ctrl},
+    key         = 'k',
+    description = 'focus the previous screen',
+    group       = 'screen',
+    on_press    = function() awful.screen.focus_relative(-1) end,
   },
   awful.key{
-     modifiers   = {mod.super, mod.ctrl},
-     key         = 'n',
-     description = 'restore minimized',
-     group       = 'client',
-     on_press    = function()
-        local c = awful.client.restore()
-        if c then
-           c:activate{raise = true, context = 'key.unminimize'}
-        end
-     end,
+    modifiers   = {mod.super, mod.ctrl},
+    key         = 'n',
+    description = 'restore minimized',
+    group       = 'client',
+    on_press    = function()
+      local c = awful.client.restore()
+      if c then
+        c:activate{raise = true, context = 'key.unminimize'}
+      end
+    end,
   },
 }
 

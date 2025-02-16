@@ -1,7 +1,5 @@
 local _M = {}
 local awful = require("awful")
-local gears = require("gears")
-local be = require("beautiful")
 local createbox = require("widgets.createbox")
 local client = client
 local screen = screen
@@ -9,25 +7,11 @@ local mod = require'bindings.mod'
 
 screen.connect_signal('request::desktop_decoration', function(s)
   function _M.box(col, darkcol)
-    -- borders
-    be.taglist_shape_border_width = 1
-    be.taglist_shape_border_color = be.fg_normal
-    be.taglist_shape_border_width_empty = 0
-    be.taglist_shape_border_width_focus = 0
-
-    -- background
-    be.taglist_bg_empty = be.background
-    be.taglist_bg_occupied = be.background
-    be.taglist_bg_focus = col or be.foreground
-
-    -- shape and spacing
-    be.taglist_shape = gears.shape.rounded_rect
-    be.taglist_spacing = 5
 
     return awful.widget.taglist{
       screen = s,
       filter = awful.widget.taglist.filter.all,
-      widget_template = createbox.createtagbox(darkcol),
+      widget_template = createbox.createtagbox(col, darkcol),
       buttons = {
         awful.button{
           modifiers = {},

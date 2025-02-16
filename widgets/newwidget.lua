@@ -2,105 +2,95 @@ local _M = {}
 
 local wibox = require("wibox")
 local awful = require("awful")
-local beautiful = require("beautiful")
+local be = require("beautiful")
 
-function _M.newwidget(col, widget, squeeze, spacing, image_light, image_dark, left_margin, right_margin)
+function _M.newwidget(table)
   local image, bold, fg
-  local sep = wibox.widget {
-    widget = wibox.widget.separator,
-    thickness = 0,
-    forced_width = spacing or beautiful.squeeze,
-  }
-  if col then
+  if table.col then
     bold = function(stdout) return "<b>"..stdout.."</b>" end
-    if image_dark then image = image_dark else sep = nil end
-    fg = beautiful.bg_normal
+    image = table.image_dark
+    fg = be.bg_normal
   else
     bold = function(stdout) return stdout end
-    if image_light then image = image_light else sep = nil end
-    fg = beautiful.fg_normal
+    image = table.image_light
+    fg = be.fg_normal
   end
   return {
-    {
-      layout = wibox.layout.fixed.horizontal,
+    table = {
+      widget = wibox.container.margin,
+      left = table.left or 8,
+      right = table.right or 8,
       {
-        widget = wibox.widget.separator,
-        thickness = 0,
-        forced_width = left_margin,
-      },
-      {
+        layout = wibox.layout.fixed.horizontal,
         {
           {
-            widget = wibox.widget.imagebox,
-            id = "image",
-            image = image,
+            {
+              widget = wibox.widget.imagebox,
+              id = "image",
+              image = image,
+            },
+            id = "squeeze",
+            widget = wibox.container.margin,
+            top = table.squeeze or 8,
+            bottom = table.squeeze or 8,
+            right = table.spacing or 8,
           },
-          id = "squeeze",
-          widget = wibox.container.margin,
-          top = squeeze or beautiful.squeeze,
-          bottom = squeeze or beautiful.squeeze,
+          widget = wibox.container.place,
+          valign = "center",
         },
-        widget = wibox.container.place,
-        valign = "center",
-      },
-      sep,
-      {
         {
-          id = "foreground",
-          widget = wibox.container.background,
-          fg = fg,
-          widget or {widget = wibox.widget.textbox, id = "text"},
+          {
+            id = "foreground",
+            widget = wibox.container.background,
+            fg = fg,
+            table.widget or { widget = wibox.widget.textbox, id = "text" },
+          },
+          widget = wibox.container.place,
+          valign = "center",
         },
-        widget = wibox.container.place,
-        valign = "center",
-      },
-      {
-        widget = wibox.widget.separator,
-        thickness = 0,
-        forced_width = right_margin,
       },
     },
-  bold }
+  bold = bold }
 end
 
 function _M.newtasklist()
   return {
-    widget = wibox.layout.fixed.horizontal,
+    id = "background_role",
+    widget = wibox.container.background,
     {
-      widget = wibox.widget.separator,
-      thickness = 0,
-      forced_width = beautiful.squeeze + 5,
-    },
-    {
-      {
-        {
-          widget = awful.widget.clienticon
-        },
-        widget = wibox.container.margin,
-        top = beautiful.squeeze - 2,
-        bottom = beautiful.squeeze - 2,
-      },
       widget = wibox.container.place,
-      valign = "center",
-      halign = "center",
-    },
-    {
-      widget = wibox.widget.separator,
-      thickness = 0,
-      forced_width = beautiful.squeeze,
-    },
-    {
+      haligh = "center",
       {
-        widget = wibox.container.margin,
-        right = beautiful.squeeze + 5,
+        widget = wibox.layout.fixed.horizontal,
         {
-          widget = wibox.widget.textbox,
-          id = "text_role"
+          {
+            {
+              widget = awful.widget.clienticon
+            },
+            widget = wibox.container.margin,
+            top = 6,
+            bottom = 6,
+            left = 13,
+            right = 8,
+          },
+          widget = wibox.container.place,
+          valign = "center",
+          halign = "center",
+        },
+        {
+          {
+            widget = wibox.container.margin,
+            right = 13,
+            {
+              widget = wibox.widget.textbox,
+              id = "text_role"
+            },
+          },
+          widget = wibox.container.place,
+          valign = "center",
+          halign = "center",
         },
       },
-      widget = wibox.container.place,
-      valign = "center",
-      halign = "center",
     },
   }
 end

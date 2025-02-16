@@ -40,7 +40,7 @@ screen.connect_signal('request::desktop_decoration', function(s)
 end)
 
 function _M.box(col, darkcol)
-  return createbox.createbox(layoutbox, buttons, col, darkcol)
+  return createbox.createbox(layoutbox, buttons, col, darkcol, 5)
 end
 
 return _M

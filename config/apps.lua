@@ -1,5 +1,5 @@
 local _M = {
-  terminal = 'alacritty',
+  terminal = 'st',
   editor   = 'nvim',
   screenshot = 'maim ~/.cache/$(date +%s).png',
   screencrop = 'maim -s ~/.cache/$(date +%s).png',

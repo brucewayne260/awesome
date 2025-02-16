@@ -23,15 +23,7 @@ function _M.create_tasklist(s)
       },
       layout  = wibox.layout.flex.horizontal
     },
-    widget_template = {
-      id = "background_role",
-      widget = wibox.container.background,
-      {
-        widget = wibox.container.place,
-        haligh = "center",
-        newwidget.newtasklist(),
-      },
-    },
+    widget_template = newwidget.newtasklist(),
 		buttons = {
 			awful.button{
 				modifiers = {},

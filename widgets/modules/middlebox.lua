@@ -2,7 +2,7 @@ local _M = {}
 
 local awful = require("awful")
 local wibox = require("wibox")
-local beautiful = require("beautiful")
+local be = require("beautiful")
 local playerctlbox = require("widgets.modules.playerctlbox")
 local tasklistbox = require("widgets.modules.tasklistbox")
 local screen = screen
@@ -14,14 +14,14 @@ _M.toggle_box = function()
   if middlebox:get_children_by_id("ratio")[1]:get_ratio(1) == 1 then
     middlebox:get_children_by_id("ratio")[1]:add(tasklist)
     middlebox:get_children_by_id("ratio")[1]:adjust_ratio(2, 0, 1, 0)
-    playerctlbox.playerctlbox:get_children_by_id("foreground")[1].fg = beautiful.fg_normal
+    playerctlbox.playerctlbox:get_children_by_id("foreground")[1].fg = be.fg_normal
     playerctlbox.focus = false
-    playerctlbox.update_player()
+    playerctlbox.update_icon()
   else
     middlebox:get_children_by_id("ratio")[1]:remove(2)
-    playerctlbox.playerctlbox:get_children_by_id("foreground")[1].fg = beautiful.fg_focus
+    playerctlbox.playerctlbox:get_children_by_id("foreground")[1].fg = be.fg_focus
     playerctlbox.focus = true
-    playerctlbox.update_player()
+    playerctlbox.update_icon()
   end
 end
 
@@ -52,9 +52,9 @@ screen.connect_signal('request::desktop_decoration', function(s)
     tasklist,
   }
 end)
-middlebox:get_children_by_id("ratio")[1]:adjust_ratio(2, 0, 1, 0)
 
 function _M.box(col, darkcol)
+  middlebox:get_children_by_id("ratio")[1]:adjust_ratio(2, 0, 1, 0)
   return createbox.createbox(middlebox, buttons, col, darkcol)
 end
 

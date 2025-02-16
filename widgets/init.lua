@@ -17,17 +17,17 @@ local volume    = require'widgets.modules.volumebox'
 local wifi      = require'widgets.modules.wifibox'
 
 -- Widgets, colors, buttons, margins
-local menubox   = menu.box(nil, nil)
+local menubox   = menu.box()
 local tagbox    = taglist.box(be.blue, be.dblue)
-local wifibox   = wifi.box(be.orange, be.dorange, be.squeeze, 0)
-local statusbox = playerctl.box(be.green, be.dgreen, be.squeeze, be.squeeze)
-local middlebox = middle.box(nil, nil)
-local volumebox = volume.box(be.green, be.dgreen, be.squeeze, be.squeeze)
-local cpubox    = cpu.box(be.red, be.dred, be.squeeze, be.squeeze)
-local membox    = mem.box(be.blue, be.dblue, be.squeeze, be.squeeze)
-local miscbox   = misc.box(be.yellow, be.dyellow, be.squeeze, be.squeeze)
-local clockbox  = clock.box(be.black, be.dblack, be.squeeze, be.squeeze)
-local layoutbox = layout.box(nil, nil)
+local wifibox   = wifi.box(be.orange, be.dorange, 8, 0)
+local statusbox = playerctl.box(be.green, be.dgreen)
+local middlebox = middle.box()
+local volumebox = volume.box(be.green, be.dgreen)
+local cpubox    = cpu.box()
+local membox    = mem.box(be.yellow, be.dyellow)
+local miscbox   = misc.box()
+local clockbox  = clock.box(be.blue, be.dblue)
+local layoutbox = layout.box()
 
 function _M.create_wibar(s)
   return awful.wibar{
@@ -59,6 +59,7 @@ function _M.create_wibar(s)
         -- middle widgets
         {
           widget = wibox.container.place,
+          content_fill_vertical = true,
           halign = "center",
           middlebox,
         },

@@ -2,10 +2,9 @@ local _M = {}
 
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local beautiful = require("beautiful")
+local be = require("beautiful")
 local createbox = require("widgets.createbox")
 local awesome = awesome
-
 local apps = require'config.apps'
 
 local awesomemenu = {
@@ -17,27 +16,27 @@ local awesomemenu = {
 }
 
 local screenshot = {
-  {'Crop a region', apps.screencrop},
-  {'Entire screen', apps.screenshot},
+  {'Crop a region', apps.screencrop },
+  {'Entire screen', apps.screenshot },
 }
 
 _M.mainmenu = awful.menu{
   items = {
-    { "awesome", awesomemenu, beautiful.awesome_icon },
-    { "open terminal", apps.terminal, beautiful.terminal },
-    { "file manager", apps.file_manager, beautiful.filemanager },
-    { "web browser", apps.browser, beautiful.webbrowser },
-    { "screenshot", screenshot, beautiful.display },
+    { "open terminal", apps.terminal },
+    { "file manager", apps.file_manager },
+    { "web browser", apps.browser },
+    { "awesome", awesomemenu },
+    { "screenshot", screenshot },
   }
 }
 
 local launcher = awful.widget.launcher{
-  image = beautiful.awesome_icon,
+  image = be.awesome_icon,
   menu = _M.mainmenu,
 }
 
 function _M.box(col, darkcol)
-  return createbox.createbox(launcher, nil, col, darkcol)
+  return createbox.createbox(launcher, nil, col, darkcol, 5)
 end
 
 return _M
